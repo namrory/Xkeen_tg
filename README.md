@@ -1,8 +1,8 @@
 # 🤖 XKeen Telegram Bot v2.0 ADVANCED
-
+(в процессе тестирования)
 Полнофункциональный Telegram-бот для управления **XKeen** (Xray прокси-клиент) на роутерах **Keenetic** с поддержкой **VLESS конфигураций**.
 
-[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
 
 ---
