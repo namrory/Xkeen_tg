@@ -1,0 +1,133 @@
+⚡ БЫСТРАЯ ИНСТРУКЦИЯ - XKeen Telegram Bot v2.0
+
+═══════════════════════════════════════════════════════════════
+
+🔴 ОБЯЗАТЕЛЬНО ПЕРВЫМ ДЕЛОМ: Создайте политику XKeen на роутере!
+
+Веб: http://192.168.1.1 → Приоритеты → Политики доступа
+  → Создать "XKeen" → Применить к устройствам
+
+БЕЗ ЭТОГО БОТ НЕ БУДЕТ РАБОТАТЬ!
+
+═══════════════════════════════════════════════════════════════
+
+📋 ШАГА УСТАНОВКИ:
+
+1️⃣  @BotFather в Telegram
+   /newbot → создаёте бота → копируете TOKEN
+
+2️⃣  @userinfobot в Telegram
+   Пишете любое сообщение → копируете User ID
+
+3️⃣  SSH на роутер
+   ssh -p 222 root@192.168.1.1
+   Пароль: keenetic
+
+4️⃣  Установка зависимостей
+   opkg update
+   opkg remove python3 python3-pip --force-removal-of-dependent-packages
+   opkg install python3 python3-pip
+   pip3 install python-telegram-bot==13.15 paramiko
+
+5️⃣  Создаем файл бота
+   nano /opt/xkeen_tg_bot.py
+   
+   [Вставьте весь код из xkeen_tg_bot.py]
+   
+   ЗАМЕНИТЕ В КОДЕ:
+   - BOT_TOKEN = "YOUR_..." → BOT_TOKEN = "123456:ABC..."
+   - ALLOWED_CHAT_ID = YOUR_... → ALLOWED_CHAT_ID = 123456789
+   
+   Сохраняем: Ctrl+O → Enter → Ctrl+X
+
+6️⃣  Запуск бота
+   chmod +x /opt/xkeen_tg_bot.py
+   nohup python3 /opt/xkeen_tg_bot.py > /opt/xkeen_bot.log 2>&1 &
+
+7️⃣  Тест в Telegram
+   Напишите боту: /start
+   Должны появиться кнопки!
+
+═══════════════════════════════════════════════════════════════
+
+🎯 ОСНОВНЫЕ КОМАНДЫ:
+
+VLESS:
+  /add_vless vless://... - добавить конфиг
+  /list_vless            - список конфигов
+  /show_current          - текущий конфиг
+  /switch_vless [name]   - переключить
+  /test_vless            - тест текущего
+  /test_all              - тест всех
+
+XKeen:
+  /status                - статус
+  /restart               - перезапуск
+  /ports                 - порты
+  /version               - версии
+  /policy                - про политику
+  /help                  - все команды
+
+═══════════════════════════════════════════════════════════════
+
+📱 ПРИМЕР: Загрузить новый VLESS
+
+1. Скопируйте VLESS ссылку:
+   vless://12345678-1234-5678-1234-567812345678@example.com:443?fp=chrome&sni=example.com&pbk=KEY&sid=12345678
+
+2. Отправьте боту (или используйте /add_vless)
+
+3. Бот парсит, сохраняет, активирует, перезапускает XKeen
+
+4. Проверьте /show_current или /test_vless
+
+═══════════════════════════════════════════════════════════════
+
+🧪 ПРОВЕРКА:
+
+Посмотреть логи бота:
+  tail -50 /opt/xkeen_bot.log
+
+Перезапустить бота:
+  pkill -f xkeen_tg_bot.py
+  nohup python3 /opt/xkeen_tg_bot.py > /opt/xkeen_bot.log 2>&1 &
+
+Конфиги хранятся:
+  ls /opt/vless-configs/
+
+═══════════════════════════════════════════════════════════════
+
+❌ ПРОБЛЕМЫ:
+
+"ModuleNotFoundError: No module named 'logging'"
+→ opkg remove python3 python3-pip --force-removal-of-dependent-packages
+→ opkg install python3 python3-pip
+→ pip3 install python-telegram-bot==13.15
+
+Бот не запускается
+→ python3 /opt/xkeen_tg_bot.py  (запустить вручную, видно ошибку)
+
+VLESS не работает
+→ /test_all  (проверить доступность)
+→ /switch_vless [конфиг]  (переключить на рабочий)
+
+═══════════════════════════════════════════════════════════════
+
+💡 СОВЕТЫ:
+
+• Всегда сначала проверьте политику XKeen на роутере
+• Сохраняйте несколько VLESS конфигов (сервера меняются)
+• Используйте /test_all перед включением нового конфига
+• Логи помогут понять проблему
+
+═══════════════════════════════════════════════════════════════
+
+🔗 ССЫЛКИ:
+
+XKeen GitHub: https://github.com/Corvus-Malus/XKeen
+Keenetic форум: https://forum.keenetic.ru/topic/16899-xkeen/
+VLESS: https://xtls.github.io/
+
+═══════════════════════════════════════════════════════════════
+
+Вопросы? Читайте README.md и документацию!
